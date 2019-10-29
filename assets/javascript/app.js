@@ -12,66 +12,69 @@ var topics = [
 "chess brain",
 "chess board",
 ]
+// Now we need a for loop displaying the buttons. 
+for (var i = 0; i < topics.length; i++) {
+    // let's make a variable. 
+   var chessButton = $("<button>");
+//    and make the text of the button the result of the topics for loop. 
+   chessButton.text(topics[i]);
+//    and let's console log to make sure we're grabbing the correct item. 
+   console.log(chessButton.text());
 
+// Need somewhere to place the buttons on the html. 
 
+   $("#buttons-appear-here").append(chessButton);
+}
 
+// But now we need the variable chess button to reach the onclick function. We can actually leave the "chessButton" variable outside of the onclick function, because we can simply have the text of the button equal the search function, so no need to include a global variable. 
 
-
-
-
-//  Let's start with the typical approach to the ajax get method. We will create multiple buttons 
-
-
+//  Here we will place our button onclick function. We want the function to apply to all buttons, as we won't know the name of each button until it is clicked. 
 $("Button").on("click", function () {
-    var chessPiece = $(this).attr("data-chess");
+
+    // We'll grab the text of each button, and use it as our search text.
+    var chessPiece = $(this).text();
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=txD0Y9Jo1FXC5y3vOVIvR7ttQ7q8CyKi&q=" + chessPiece + "&limit=10&offset=0x&lang=en";
 
+    // so we're grabbing the giphy search URL + the APIkey and then placing "chessPiece" into the search box. Then we add the 
     console.log(chessPiece);
 
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        // Step 1: Run this file, click a button, and see what the response object looks like in the browser's console.
-        // Open up the data key, then open up the 0th, element. Study the keys and how the JSON is structured.
+    //    No we can run the AJAX query. 
 
         console.log(response);
 
-        // Step 2: since the image information is inside of the data key,
-        // make a variable named results and set it equal to response.data
-
-        // =============== put step 2 in between these dashes ==================
+    //  Now we need a results variable. We will use the typical approach. 
         var results = response.data;
         // ========================
 
         for (var i = 0; i < results.length; i++) {
 
-            // Step 3: uncomment the for loop above and the closing curly bracket below.
-            // Make a div with jQuery and store it in a variable named animalDiv.
+            // Now we run a loop to grab the results and apply them to a variable. 
+
+            // and we'll create a div to put those results in. 
             var chessDiv = $("<div>");
             console.log(chessDiv);
 
-            // var rating = results[i].rating;
-            // Make a paragraph tag with jQuery and store it in a variable named p.
+            //And the rating results will go inside a paragraph, which will connect to the div. 
             var p = $("<p>");
+            // so let's grab the rating from the giphy API
             p.text(results[i].rating);
+            // and prepend that to the giphy image we will make below. 
             p.prepend("Rating: ");
 
-            // Set the inner text of the paragraph to the rating of the image in results[i].
-            // Make an image tag with jQuery and store it in a variable named animalImage.
+            // Now we need to grab the image. 
             var chessImage = $("<img>");
-            // Set the image's src to results[i]'s fixed_height.url.
+            // And we'll set the source to the fixed height url on. We may need to change this to still and then fix it later with on clicks. 
             chessImage.attr("src", results[i].images.fixed_height.url);
-            // Append the p variable to the animalDiv variable.
+            // Then we will add the ratings text to the image. 
             chessDiv.append(p);
-            // Append the animalImage variable to the animalDiv variable.
             chessDiv.append(chessImage);
-            // Prepend the animalDiv variable to the element with an id of gifs-appear-here.
+            // And we will push all of that into a prepend of the div that we listed in our html. 
             $("#gifs-appear-here").prepend(chessDiv);
 
-            // ============= put step 3 in between these dashes ======================
-
-            // ==================================
         }
 
     });
