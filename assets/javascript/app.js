@@ -1,39 +1,41 @@
 // Let's start by making the topics array. We'll use chess pieces. But in order for the search to work property, I need to call each one of them something the giphy API will recognize, so I need to use a space and the word chess first. 
 
 var topics = [
-"chess pawn",
-"chess knight",
-"chess bishop",
-"chess rook",
-"chess queen",
-"chess king",
-"chess robot",
-"chess puzzle",
-"chess brain",
-"chess board",
+    "chess pawn",
+    "chess knight",
+    "chess bishop",
+    "chess rook",
+    "chess queen",
+    "chess king",
+    "chess robot",
+    "chess puzzle",
+    "chess brain",
+    "chess board",
 ]
 // Now we need a for loop displaying the buttons. 
 for (var i = 0; i < topics.length; i++) {
     // let's make a variable. 
-   var chessButton = $("<button>");
-//    and make the text of the button the result of the topics for loop. 
-   chessButton.text(topics[i]);
-//    and let's console log to make sure we're grabbing the correct item. 
-   console.log(chessButton.text());
+    var chessButton = $("<button>"); 
+    //    and make the text of the button the result of the topics for loop. 
+    chessButton.text(topics[i]);
+    //    and let's console log to make sure we're grabbing the correct item. 
+    console.log(chessButton.text());
 
-// Need somewhere to place the buttons on the html. 
+    // Need somewhere to place the buttons on the html. 
 
-   $("#buttons-appear-here").append(chessButton);
+    $("#buttons-appear-here").append(chessButton);
 }
 
 // But now we need the variable chess button to reach the onclick function. We can actually leave the "chessButton" variable outside of the onclick function, because we can simply have the text of the button equal the search function, so no need to include a global variable. 
 
 //  Here we will place our button onclick function. We want the function to apply to all buttons, as we won't know the name of each button until it is clicked. 
-$("Button").on("click", function () {
+$("button").on("click", function () {
 
     // We'll grab the text of each button, and use it as our search text.
     var chessPiece = $(this).text();
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=txD0Y9Jo1FXC5y3vOVIvR7ttQ7q8CyKi&q=" + chessPiece + "&limit=10&offset=0x&lang=en";
+    var submitButton = $("#inputSearch").val();
+    console.log(submitButton);
 
     // so we're grabbing the giphy search URL + the APIkey and then placing "chessPiece" into the search box. Then we add the 
     console.log(chessPiece);
@@ -42,11 +44,11 @@ $("Button").on("click", function () {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-    //    No we can run the AJAX query. 
+        //    No we can run the AJAX query. 
 
         console.log(response);
 
-    //  Now we need a results variable. We will use the typical approach. 
+        //  Now we need a results variable. We will use the typical approach. 
         var results = response.data;
         // ========================
 
