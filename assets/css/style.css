@@ -1,0 +1,21 @@
+.jumbotron
+{
+    padding:25px;
+}
+
+.gif
+{
+   padding-top:0px;
+   padding-left:10px;
+   padding-bottom:5px;
+}
+
+.addPadding
+{
+    padding:10px;
+}
+
+.addMargin
+{
+    margin:2px;
+}

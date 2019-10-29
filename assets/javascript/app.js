@@ -11,7 +11,12 @@ var topics = [
     "chess puzzle",
     "chess brain",
     "chess board",
+    "chess grandmaster",
+    "chess dog",
+    "chess cat",
+    "chess dance",
 ]
+
 function renderButtons() {
     $("#buttons-appear-here").empty();
     // Now we need a for loop displaying the buttons. 
@@ -20,6 +25,10 @@ function renderButtons() {
         var chessButton = $("<button>");
         // adding class to buttons. 
         chessButton.addClass("gifButton");
+        chessButton.addClass("bg-info");
+        chessButton.addClass("text-light");
+        chessButton.addClass ("addPadding");
+        chessButton.addClass ("addMargin");
         // and need to set some attributes so that I can change back and forth between them. 
 
         //    and make the text of the button the result of the topics for loop. 
@@ -35,7 +44,6 @@ function renderButtons() {
 renderButtons();
 
 $(document).on("click", ".submitButton", function () {
-
     var submitButton = $("#inputSearch").val();
     topics.push(submitButton);
     console.log(submitButton);
@@ -48,6 +56,7 @@ $(document).on("click", ".submitButton", function () {
 $(document).on("click", ".gifButton", function () {
 
     // We'll grab the text of each button, and use it as our search text.
+    $("#gifs-appear-here").empty();
     var chessPiece = $(this).text();
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=txD0Y9Jo1FXC5y3vOVIvR7ttQ7q8CyKi&q=" + chessPiece + "&limit=10&offset=0x&lang=en";
 
@@ -76,6 +85,7 @@ $(document).on("click", ".gifButton", function () {
 
             //And the rating results will go inside a paragraph, which will connect to the div. 
             var p = $("<p>");
+            p.addClass("gif border")
             // so let's grab the rating from the giphy API
             p.text(results[i].rating);
             // and prepend that to the giphy image we will make below. 
@@ -106,7 +116,7 @@ $(document).on("click", ".gifButton", function () {
 $(document).on("click", ".gif", function() {
 //    Need to add an onclick so that the gifs go from still state to active state. 
     var state = $(this).attr("data-state");
-    // This is similar to the functionality of the pausing gifs functionality. We will use an if/else statement to have the click animate, and then switch it back if it is reclicked. 
+    // This is similar to the functionality of the pausing gifs activity. We will use an if/else statement to have the click animate, and then switch it back if it is reclicked. 
     if (state === "still") {
       $(this).attr("src", $(this).attr("data-animate"));
       $(this).attr("data-state", "animate");

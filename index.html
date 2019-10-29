@@ -20,20 +20,66 @@
 </head>
 
 <body>
+
+
+    <div class="jumbotron jumbotron-fluid bg-info headerBox text-center">
+        <div class="container">
+            <h1 class="display-4 text-light"> <i class="fas fa-chess-queen"></i> Chess Giphy <i
+                    class="fas fa-chess-queen"></i></h1>
+
+        </div>
+    </div>
     <!-- Going to put the buttons here. Working on functionality first and will deal with the actual structure later. -->
 
-    <div class="admissionButtons" id="buttons-appear-here"> </div>
+    <div class="container formcontainer">
+        <div class="card searchP">
+            <div class="card-header"> <i class="fas fa-mouse"></i> Current Buttons</div>
+            <div class="employeeInput card-body">
+            </div>
 
-    <div class="form-group">
-        <label for="inputSearch">Add a Chess Gif Below</label>
-        <input type="text" class="form-control" id="inputSearch" placeholder="">
-    </div>
-    <!-- I need this particular onclick event to grab the text of the submission form, rather than the text of the button itself.  -->
-    <button type="button" class="btn btn-info submitButton" id="add-giph"> Submit</button>
+            <div class="form-group">
+                <div class="row text-center">
+                    <div class="col-12 text-center">
+                        <div class="admissionButtons" id="buttons-appear-here"> </div>
+                    </div>
+                </div>
+            </div>
 
-    <div id="gifs-appear-here">
-        This turns into the gifs images.
+        </div>
     </div>
+    <br>
+    <div class="container formcontainer">
+        <div class="card searchP">
+            <div class="card-header"> <i class="fas fa-plus-circle"></i>
+                Add a Chess Gif by typing below. After clicking submit, click the
+                new button to let the gifs fly.</div>
+            <div class="employeeInput card-body">
+                <input type="text" class="form-control" id="inputSearch" placeholder="type here">
+                <!-- I need this particular onclick event to grab the text of the submission form, rather than the text of the button itself.  -->
+                <br>
+                <button type="button" class="btn-small btn-info submitButton" id="add-giph"> Submit</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container formcontainer bottomContainer">
+        <div class="card searchP">
+            <div class="card-header"> <i class="fas fa-smile"></i>
+                Enjoy!</div>
+            <div class="container">
+                <div class="row" id="gifs-appear-here">
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
 
     <script type="text/javascript" src="assets/javascript/app.js">
     </script>
