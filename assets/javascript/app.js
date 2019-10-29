@@ -20,6 +20,8 @@ function renderButtons() {
         var chessButton = $("<button>");
         // adding class to buttons. 
         chessButton.addClass("gifButton");
+        // and need to set some attributes so that I can change back and forth between them. 
+
         //    and make the text of the button the result of the topics for loop. 
         chessButton.text(topics[i]);
         //    and let's console log to make sure we're grabbing the correct item. 
@@ -34,10 +36,10 @@ renderButtons();
 
 $(document).on("click", ".submitButton", function () {
 
-var submitButton = $("#inputSearch").val();
-topics.push(submitButton);
-console.log(submitButton);
-renderButtons();
+    var submitButton = $("#inputSearch").val();
+    topics.push(submitButton);
+    console.log(submitButton);
+    renderButtons();
 })
 
 // But now we need the variable chess button to reach the onclick function. We can actually leave the "chessButton" variable outside of the onclick function, because we can simply have the text of the button equal the search function, so no need to include a global variable. 
@@ -82,14 +84,34 @@ $(document).on("click", ".gifButton", function () {
             // Now we need to grab the image. 
             var chessImage = $("<img>");
             // And we'll set the source to the fixed height url on. We may need to change this to still and then fix it later with on clicks. 
-            chessImage.attr("src", results[i].images.fixed_height.url);
+            chessImage.attr("src", results[i].images.fixed_height_still.url);
+
+            // add two attributes for still state and active state. 
+            chessImage.attr("data-state", "still");
+            chessImage.attr("data-still", results[i].images.fixed_height_still.url);
+            chessImage.attr("data-animate", results[i].images.fixed_height.url);
+            console.log(chessImage);
+            chessImage.addClass("gif");
             // Then we will add the ratings text to the image. 
             chessDiv.append(p);
             chessDiv.append(chessImage);
             // And we will push all of that into a prepend of the div that we listed in our html. 
             $("#gifs-appear-here").prepend(chessDiv);
-
         }
 
     });
+
 });
+
+$(document).on("click", ".gif", function() {
+//    Need to add an onclick so that the gifs go from still state to active state. 
+    var state = $(this).attr("data-state");
+    // This is similar to the functionality of the pausing gifs functionality. We will use an if/else statement to have the click animate, and then switch it back if it is reclicked. 
+    if (state === "still") {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    } else {
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
+    }
+  });
