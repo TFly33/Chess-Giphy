@@ -1,4 +1,5 @@
 // Let's start by making the topics array. We'll use chess pieces. But in order for the search to work property, I need to call each one of them something the giphy API will recognize, so I need to use a space and the word chess first. 
+$(document).ready(function () {
 
 var topics = [
     "chess pawn",
@@ -125,3 +126,5 @@ $(document).on("click", ".gif", function() {
       $(this).attr("data-state", "still");
     }
   });
+
+});
